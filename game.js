@@ -1,5 +1,5 @@
 /* global twemoji, alert, MouseEvent, game */
-const numbers = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣']
+const numbers = ['️1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣']
 const iDevise = navigator.platform.match(/^iP/)
 const feedback = document.querySelector('.feedback')
 
@@ -178,7 +178,7 @@ Game.prototype.resetMetadata = function () {
   document.getElementById('timer').textContent = '0.00'
   document.querySelector('.wrapper').classList.remove('won', 'lost')
   document.querySelector('.result-emoji').textContent = ''
-  document.querySelector('.default-emoji').innerHTML = this.usetwemoji ? twemoji.parse('😀') : '😀'
+  document.querySelector('.default-emoji').innerHTML = '💤'
   document.querySelector('.js-settings').innerHTML = this.usetwemoji ? twemoji.parse('🔧') : '🔧'
 }
 
@@ -188,6 +188,7 @@ Game.prototype.startTimer = function () {
   this.timer = setInterval(function () {
     document.getElementById('timer').textContent = ((new Date() - game.startTime) / 1000).toFixed(2)
   }, 100)
+  document.querySelector('.default-emoji').innerHTML = '⏲️'
 }
 
 Game.prototype.mine = function (bomb) {
@@ -292,15 +293,9 @@ Game.prototype.showMessage = function () {
   clearInterval(this.timer)
   var seconds = ((new Date() - this.startTime) / 1000).toFixed(2)
   var winner = this.result === 'won'
-  var emoji = winner ? '😎' : '😵'
+  var emoji = winner ? '🎉' : '💥'
   this.updateFeedback(winner ? "Yay, you won!" : "Boom! you lost.")
   document.querySelector('.wrapper').classList.add(this.result)
   document.getElementById('timer').textContent = seconds
-  document.getElementById('result').innerHTML = this.usetwemoji ? twemoji.parse(emoji) : emoji
+  document.getElementById('result').innerHTML = emoji
 }
-
-// console documentation
-
-console.log('Use: `new Game(cols, rows, bombs, [emptyemoji, bombemoji, flagemoji, starteremoji], twemojiOrNot)` to start a new game with customizations.')
-console.log(' Eg: `game = new Game(10, 10, 10, ["🌱", "💥", "🚩", "◻️"], false)`')
-console.log(' Or: `game = new Game(16, 16, 30, ["🐣", "💣", "🚧", "◻️"], true)`')
