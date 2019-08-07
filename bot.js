@@ -93,4 +93,4 @@ Bot.prototype.solve = function() {
 
 bot = new Bot();
 
-bot.solve();
+//bot.solve();
